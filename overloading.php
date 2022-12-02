@@ -20,13 +20,12 @@ Class User
     {
         $this->age = $age;
     }
-    public function __call(string $email, array $arguments)
+    public function __call(string $method, array $arguments)
     {
-        call_user_func_array(
-            [$this, 'setEmail'],
-            $arguments[0]
-        );
-        echo $this;
+        if (!method_exists($this, $method)){
+            throw new Exception("Method exists");
+        }
+        call_user_func_array(array($this, $method), $arguments);
     }
     public function getAll()
     {
@@ -37,10 +36,11 @@ Class User
 try{
     $test = new User('Oleksandr', 23);
     $test1 = $test->getAll();
-    echo $test1;
-    $test->setEmail();
 
+    $test1 = $test->setEmail();
+    echo $test1;
 }catch (Exception $e){
     echo '<pre>' . print_r($e->getMessage(), true) . '<pre>';
     die();
 }
+

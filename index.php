@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/exceptions.php';
-require_once __DIR__ . '/traits.php';
-require_once __DIR__ . '/overloading.php';
+//require_once __DIR__ . '/exceptions.php';
+//require_once __DIR__ . '/traits.php';
+//require_once __DIR__ . '/overloading.php';
 //
 //try {
 ////    postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
@@ -89,8 +89,8 @@ class RandomColor
 }
 
 $r = RandomColor::random();
-//$random = new RandomColor(0, 0, 0);
-//$rand = $random->random();
+$random = new RandomColor(0, 0, 0);
+$rand = $random->random();
 echo '<pre>';
 print_r($r);
 echo '<pre>';
