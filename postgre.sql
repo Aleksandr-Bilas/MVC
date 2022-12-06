@@ -1,0 +1,87 @@
+--
+-- CREATE TABLE clients(
+--                         id INT PRIMARY KEY ,
+--                         fullname VARCHAR(100) NOT NULL,
+--                         number SMALLINT UNIQUE,
+--                         address VARCHAR(255) NOT NULL
+-- );
+-- CREATE TABLE orders(
+--                        id INT PRIMARY KEY,
+--                        client_id INT,
+--                        dateorder DATE NOT NULL,
+--                        fulfillment DATE NOT NULL,
+--                        orderprice FLOAT CHECK (orderprice > 0) DEFAULT 0,
+--                        FOREIGN KEY (client_id) REFERENCES clients(id)
+-- );
+-- CREATE TABLE employees(
+--                           id INT PRIMARY KEY,
+--                           fullname VARCHAR(100) NOT NULL,
+--                           extensionnumber SMALLINT UNIQUE
+-- );
+-- CREATE TABLE items(
+--                       id INT PRIMARY KEY,
+--                       client_id INT,
+--                       orders_id INT,
+--                       employees_id INT,
+--                       type VARCHAR(100) NOT NULL,
+--                       price FLOAT CHECK (price > 0) DEFAULT 0,
+--                       FOREIGN KEY (client_id) REFERENCES clients(id),
+--                       FOREIGN KEY (orders_id) REFERENCES orders(id),
+--                       FOREIGN KEY (employees_id) REFERENCES employees(id)
+-- );
+
+-- DROP TABLE employees;
+-- INSERT INTO clients
+-- (id,fullname, number, address)
+-- VALUES
+-- (1,'Client1', 12345, 'address 1'),
+-- (2,'Client2', 12457, 'address 2'),
+-- (3,'Client3', 23587, 'address 3'),
+-- (4,'Client4', 32165, 'address 4'),
+-- (5,'Client5', 13568, 'address 5');
+--
+-- INSERT INTO orders
+-- (id, client_id, dateorder, fulfillment, orderprice)
+-- VALUES
+--     (1,4, '05.12.2022', '08.12.2022', 3500),
+--     (2,3, '03.12.2022', '06.12.2022', 2350),
+--     (3,1, '05.12.2022', '08.12.2022', 1380),
+--     (4,5, '01.12.2022', '04.12.2022', 1550),
+--     (5,2, '04.12.2022', '07.12.2022', 2800);
+--
+-- INSERT INTO employees
+-- (id, fullname, extensionnumber)
+-- VALUES
+--     (1, 'employee1', 1234),
+--     (2, 'employee2', 1425),
+--     (3, 'employee3', 2536),
+--     (4, 'employee4', 4758),
+--     (5, 'employee5', 3698);
+--
+-- INSERT INTO items
+-- (id, client_id, orders_id, employees_id, type, price)
+-- VALUES
+--     (1, 1, 4, 1, 'type1, type2, type3', 3500),
+--     (2, 2, 3, 2, 'type1, type2, type3', 2350),
+--     (3, 3, 1, 3, 'type1, type2, type3', 1380),
+--     (4, 4, 5, 4, 'type1, type2, type3', 1550),
+--     (5, 5, 2, 5, 'type1, type2, type3', 2800);
+
+-- UPDATE clients SET fullname = 'client1.1' WHERE id = 1;
+
+-- DELETE FROM orders WHERE id = 4;
+
+-- SELECT * FROM clients;
+-- SELECT dateorder, fulfillment FROM orders;
+-- SELECT *
+-- FROM    orders
+-- WHERE orderprice > 2000;
+--
+-- SELECT c.fullname as clients, COUNT(o.id) as orders
+-- FROM clients as c
+-- LEFT JOIN orders o on c.id = o.client_id
+-- GROUP BY clients
+-- HAVING amount > 2000
+-- ORDER BY amount
+
+-- ALTER TABLE clients ADD COLUMN age text;
