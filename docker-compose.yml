@@ -21,11 +21,6 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres:/var/lib/postgresql/data
-  adminer:
-      image: adminer
-      restart: always
-      ports:
-        - "6080:8080"
   app:
     build:
       context: .docker/php
@@ -34,6 +29,6 @@ services:
       - .:/var/www/html
     ports:
       - "8888:80"
-#    networks:
-#      - php_advanced
+    networks:
+      - php_advanced
 
