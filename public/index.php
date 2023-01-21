@@ -1,21 +1,28 @@
 <?php
+
+use Config\Config;
+
 require_once dirname(__DIR__) . '/Config/constants.php';
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once BASE_DIR . '/vendor/autoload.php';
 
 
-$dotenv = Dotenv::createUnsafeImmutable(BASE_DIR);
+$dotenv = \Dotenv\Dotenv::createUnsafeImmutable(BASE_DIR);
 $dotenv->load();
 
+//try {
+//    $pdo = new PDO(
+//        'pgsql:host=db;dbname=postgres',
+//        Config::get('db.user'),
+//        Config::get('db.password')
+//    );
+//
+//
+//} catch (PDOException $exception){
+//    echo('Exception' .  $exception->getMessage());
+//}
+
 try {
-    $pdo = new PDO(
-        'pgsql:host=db;dbname=postgres',
-        Config::get('db.user'),
-        Config::get('db.password')
-    );
-   echo Config::get('db.user');
-
+    var_dump(\Core\Db::connect());
 } catch (PDOException $exception){
-    echo('Exception' .  $exception->getMessage());
+    var_dump('Exception', $exception->getMessage());
 }
-
-
