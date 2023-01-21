@@ -12,6 +12,7 @@ networks:
 services:
   db:
     image: postgres
+    container_name: db
     restart: always
     environment:
       POSTGRES_PASSWORD: root
@@ -20,8 +21,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/temp
   app:
+    container_name: php
     build:
       context: .docker/php
     restart: always
