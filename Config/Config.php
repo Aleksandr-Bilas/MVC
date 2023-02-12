@@ -18,7 +18,7 @@ class Config
 
     public function getParam(string $name): mixed
     {
-        $this->loadConfigs();
+//        $this->loadConfigs();
 
         $keys = explode('.', $name);
 
@@ -29,23 +29,23 @@ class Config
     {
         $configs = [];
         if (empty($this->configs)) {
-            $this->configs = include BASE_DIR . '/Config/configs.php';
+            $this->configs = include 'configs.php';
         }
-        return$configs;
+        return $configs;
     }
 
     protected function findParamByKeys(array $keys = [], array $configs = [])
     {
 
         if (empty($keys)){
-            return $value;
+            return null;
         }
 
         $search = array_shift($keys);
 
         if (array_key_exists($search, $configs)) {
-            $value = is_array($configs[$search]) ? $this->findParamByKeys($keys, $configs) : $configs[$search];
+            return is_array($configs[$search]) ? $this->findParamByKeys($keys, $configs) : $configs[$search];
         }
-        return $value;
+        return null;
     }
 }
